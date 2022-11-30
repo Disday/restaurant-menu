@@ -1,21 +1,26 @@
 import { PrismaClient as Prisma } from '@prisma/client'
 import express from 'express';
 import { body, validationResult } from 'express-validator';
-import cors from 'cors'
-const multer = require('multer')
+import cors from 'cors';
+import path from 'path';
 
+const multer = require('multer')
 const prisma = new Prisma();
 const app = express();
 const upload = multer({ dest: 'images/' })
 
 app.use(express.json())
 app.use('/images', express.static('./images'));
+app.use(express.static('./vue-project/dist'));
 app.use(cors(
   // { origin: process.env.API_URL }
 ));
 
 
 app
+  .get('/', async (req, res) => {
+    res.sendFile(path.resolve(__dirname, '..', 'vue-project/dist/index.html'));
+  })
   .get('/items', async (req, res) => {
     console.log('');
     const items = await prisma.item.findMany({

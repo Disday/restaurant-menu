@@ -3,9 +3,10 @@ import Form from '../components/Form.vue'
 import { ref, watch, onMounted } from 'vue';
 import Axios from 'axios';
 
-const baseURL = "http://localhost:9000"
-const axios = Axios.create({ baseURL });
-// const axios = Axios.create({ baseURL: "http://localhost:9000" });
+// const baseURL = "https://localhost"
+const baseURL = location.href
+// console.log(location)
+const axios = Axios.create({  });
 const items = ref([])
 const categories = ref([])
 

@@ -8,12 +8,12 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: Index,
     },
     {
       path: '/index',
       name: 'index',
-      component: Index,
+      component: HomeView
     },
     {
       path: '/about',

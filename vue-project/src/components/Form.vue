@@ -10,8 +10,8 @@ const props = defineProps({
 const { items, categories } = toRefs(props)
 const emit = defineEmits(['fetchItems'])
 
-const baseURL = 'http://localhost:9000';
-const axios = Axios.create({ baseURL });
+// const baseURL = 'https://localhost';
+const axios = Axios.create({ });
 let newItem: Object;
 let formState: Object;
 
@@ -128,7 +128,8 @@ defineExpose({
         <input @change="newItem.file = $event.target.files[0]" type="file">
       </label>
     </div>
-    <input v-model="newItem.id" class="form-control">
+
+    <input v-model="newItem.id" class="form-control-plaintext d-none">
 
     <div>Категории:</div>
     <div class="btn-group mb-3" role="group" aria-label="Basic checkbox toggle button group">
