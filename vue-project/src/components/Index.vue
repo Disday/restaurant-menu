@@ -1,3 +1,4 @@
+
 <script setup lang="ts">
 import Form from '../components/Form.vue'
 import { ref, watch, onMounted } from 'vue';
@@ -5,15 +6,13 @@ import Axios from 'axios';
 
 // const baseURL = "https://localhost"
 const baseURL = location.href
-// console.log(location)
 const axios = Axios.create({});
 const items = ref([])
 const categories = ref([])
 
-const form = ref(null)
+let form: object | any= ref({});
 
 // watch(selected, (name) => {
-//   // ;[last.value, first.value] = name.split(', ')
 // })
 
 const fetchItems = async () => {
@@ -25,15 +24,12 @@ const fetchItems = async () => {
 const fetchCategories = async () => {
   const { data } = await axios.get("/categories");
   categories.value = data
-  // console.log(categories.value);
 }
-
 
 onMounted(async () => {
   await fetchItems();
   await fetchCategories()
 })
-
 
 const getImageLink = (filename: String) => {
   if (!filename) {
@@ -44,16 +40,13 @@ const getImageLink = (filename: String) => {
   return url.href;
 }
 
-const log = (data) => {
-  console.log(data);
-}
 </script>
 
 <template >
   <Form :items="items" :categories="categories" @fetchItems="fetchItems()" ref="form" />
 
   <section class="d-flex flex-column-reverse">
-    <div v-for="{ id, name, description, categories, image = {} } in items"
+    <div v-for="{ id, name, description, categories, image = { filename: '' } } in items"
       class="card mb-3 w-100 shadow x-shadow-fade-in">
       <div class="row g-0 h-100">
         <div class="col-md-2 h-100">
