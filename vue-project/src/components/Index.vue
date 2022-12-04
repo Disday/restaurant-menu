@@ -6,7 +6,7 @@ import Axios from 'axios';
 // const baseURL = "https://localhost"
 const baseURL = location.href
 // console.log(location)
-const axios = Axios.create({  });
+const axios = Axios.create({});
 const items = ref([])
 const categories = ref([])
 
